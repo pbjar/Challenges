@@ -9,8 +9,8 @@ n_arr=[]
 ct_arr=[]
 
 for t in range(17):
-  p=getPrime(256)
-  q=getPrime(256)
+  p=getPrime(512)
+  q=getPrime(512)
   n=p*q
 
   assert (n>m)
