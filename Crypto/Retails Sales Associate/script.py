@@ -1,7 +1,7 @@
 from Crypto.Util.number import *
 
 
-with open('flag.txt','r') as f:
+with open('flag.txt','rb') as f:
     flag = f.read().strip()
 
 e=65537
