@@ -1,1 +1,1 @@
-I sent my flag to 17 of my friends!
+I sent my flag to 17 of my (imaginary) friends!
