@@ -1,0 +1,283 @@
+BASIC OPS:
+00: MOV reg0 val (reg0 <- val)
+01: MOV reg0 reg1 (reg0 <- reg1)
+02: EXIT (exit program)
+
+ARITHMETIC:
+10: ADD reg0 val (reg0 += val)
+11: ADD reg0 reg1 (reg0 += reg1)
+12: SUB reg0 val (reg0 -= val)
+13: SUB reg0 reg1 (reg0 -= reg1)
+14: MUL reg0 val (reg0 *= val)
+15: MUL reg0 reg1 (reg0 *= reg1)
+16: DIV reg0 val (reg0 /= val)
+17: DIV reg0 reg1 (reg0 /= reg1)
+18: MOD reg0 val (reg0 %= val)
+19: MOD reg0 reg1 (reg0 %= reg1)
+
+BITWISE:
+20: NOT reg0 (reg0 = ~reg0)
+21: AND reg0 val (reg0 &= val)
+22: AND reg0 reg1 (reg0 &= reg1)
+23: XOR reg0 val (reg0 ^= val)
+24: XOR reg0 reg1 (reg0 ^= reg1)
+25: OR reg0,val (reg0 |= val)
+26: OR reg0,reg1 (reg0 |= reg)
+
+CONDITIONALS: 
+30: EZ reg0 (r0 = (reg0 == 0))
+31: LZ reg0 (r0 = (reg0 < 0))
+32: GZ reg0 (r0 = (reg0 > 0))
+
+BRANCHING:
+40: JMP val (jump to label with id=val)
+41: JMP reg0 (jump to label with id=reg0)
+42: JF val (jump to label with id=val if r0 != 0)
+43: JF reg0 (jump to label with id=reg0 if r0 != 0)
+
+QUEUE OPS:
+50: PUSH val (push val in queue)
+51: PUSH reg0 (push reg0 in queue)
+52: POP reg0 (pop into reg0)
+53: POPN reg0 (pop into reg0 without delete from queue)
+54: EXL val (extend queue left by val)
+55: EXL reg0 (extend queue left by reg0)
+56: EXR val (extend queue right by val)
+57: EXR reg0 (extend queue right by reg0)
+58: MVL val (move queue left by val)
+59: MVL reg0 (move queue left by reg0)
+5a: MVR val (move queue right by val)
+5b: MVR reg0 (move queue right by reg0)
+5c: GLEN reg0 (get length of queue to reg0)
+5d: SLEN val (set length of queue to val)
+5e: SLEN reg0 (set length of queue to reg0)
+5f: QSUM reg0 (get sum of queue to reg0)
+
+LABELLING:
+60: LBL val (label next instruction with id=val)
+
+IO:
+70: IN reg0 (get line of input, store in queue, store number of chars in reg0)
+71: OUT reg0 (print reg0 characters in queue)
+
+
+flag_checker.py overview (python):
+inp = input()
+i_len = len(inp)
+ans = [0] * i_len
+for i in range(i_len):
+    for j in range(i_len - i):
+        for k in range(i+1):
+            ans[j] = (ans[j] + ord(inp[j+k])) % 127
+for i in ans:
+    print("\\x" + hex(i)[-2:].replace('x', '0'), end="")
+print()
+
+flag_checker.qasm
+PUSH 67
+PUSH 69
+PUSH 6d
+PUSH 6d
+PUSH 65
+PUSH 20
+PUSH 66
+PUSH 6c
+PUSH 61
+PUSH 67
+PUSH 20
+PUSH 3e
+PUSH 3a
+PUSH 28
+PUSH 0a
+MOV r0 f
+; print "gimme flag >:("
+OUT r0
+
+; get flag, with len -> r0
+IN r0
+; set queue size to 0
+SLEN 0
+; store len in r6
+MOV r6 r0
+; iterate for r0 times (loop cnt in r5)
+MOV r5 r0
+; check length = 0x39
+SUB r0 39
+JF 11
+
+; begin loop0
+LBL 0
+; increment queue size
+EXR 1
+; iterate r5 times (len - cur)
+MOV r4 r5
+
+;begin loop1
+LBL 1
+; get sum of segment
+QSUM r3
+; store length of queue
+GLEN r2
+; turn queue to single
+SLEN 2
+; ans storage
+MVR r6
+; get current char at storage
+POP r1
+; add storage
+ADD r3 r1
+MOD r3 7f
+; do magic to align offset
+MVL 1
+; insert updated
+PUSH r3
+; realign
+MVR 1
+; send back to input
+MVL r6
+; resize queue to original
+SLEN r2
+; go to next character
+MVR 1
+SUB r4 1
+GZ r4
+JF 1
+;end loop1
+
+MVL r5
+SUB r5 1
+GZ r5
+JF 0
+; end loop0
+
+
+; char by char checking of encrypted flag
+SLEN 1
+MVR r6
+MVR r6
+; set length to 0
+SLEN 0
+; push target values
+PUSH 06
+PUSH 22
+PUSH 52
+PUSH 51
+PUSH 6b
+PUSH 41
+PUSH 42
+PUSH 2f
+PUSH 42
+PUSH 00
+PUSH 36
+PUSH 35
+PUSH 78
+PUSH 46
+PUSH 51
+PUSH 06
+PUSH 28
+PUSH 52
+PUSH 0e
+PUSH 16
+PUSH 41
+PUSH 01
+PUSH 0a
+PUSH 12
+PUSH 2d
+PUSH 55
+PUSH 1c
+PUSH 35
+PUSH 2f
+PUSH 20
+PUSH 66
+PUSH 47
+PUSH 39
+PUSH 1b
+PUSH 78
+PUSH 41
+PUSH 46
+PUSH 62
+PUSH 17
+PUSH 7d
+PUSH 20
+PUSH 4a
+PUSH 02
+PUSH 65
+PUSH 68
+PUSH 3e
+PUSH 3c
+PUSH 37
+PUSH 04
+PUSH 0e
+PUSH 59
+PUSH 3f
+PUSH 75
+PUSH 64
+PUSH 7d
+MVL r6
+MOV r5 r6
+
+XOR r1 r1
+; begin loop2
+LBL 2
+POPN r2
+MVR r6
+POPN r3
+MVL r6
+SUB r2 r3
+OR r1 r2
+MVR 1
+SUB r5 1
+GZ r5
+JF 2
+; end loop2
+
+MOV r0 r1
+JF 11
+
+; print "yes :)"
+LBL 10
+SLEN 0
+PUSH 79
+PUSH 65
+PUSH 73
+PUSH 20
+PUSH 3a
+PUSH 29
+PUSH 0a
+MOV r0 7
+OUT r0
+EXIT
+; print "no >:("
+LBL 11
+SLEN 0
+PUSH 6e
+PUSH 6f
+PUSH 20
+PUSH 3e
+PUSH 3a
+PUSH 28
+PUSH 0a
+MOV r0 7
+OUT r0
+EXIT
+
+
+reverse python:
+
+def inv(x):
+    ret = 1
+    for i in range(125):
+        ret *= x
+    return ret
+
+inp = ""
+i_len = len(inp)
+ans = [''] * i_len
+ans[-1] = inp[-1]
+for i in range(2, i_len+1):
+    ans[-i] = chr((ord(inp[-i]) - ord(inp[-i+1]) + 127) % 127 * inv(i) % 127)
+print("".join(ans))
+
+tmp
+flag{i_w0nd3r_1f_th1s_is_ev3n_4_qu3u3_4nym0r3_2396538203}
+\x06\x22\x52\x51\x6b\x41\x42\x2f\x42\x00\x36\x35\x78\x46\x51\x06\x28\x52\x0e\x16\x41\x01\x0a\x12\x2d\x55\x1c\x35\x2f\x20\x27\x20\x66\x47\x39\x1b\x78\x41\x46\x62\x17\x7d\x20\x4a\x02\x65\x68\x3e\x3c\x37\x04\x0e\x59\x3f\x75\x64\x7d
