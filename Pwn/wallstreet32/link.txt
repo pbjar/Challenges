@@ -1,0 +1,1 @@
+patchelf --set-interpreter ./ld32-2.31.so --add-needed ./libc32-2.31.so ./wallstreet32
