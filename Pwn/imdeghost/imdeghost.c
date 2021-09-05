@@ -33,8 +33,8 @@ int main(){
 	puts("You only see a ghost for a second, what was once there disappears in an instant, like a quick breeze in a still autumn forest.");
 	puts("Many people will say it was never there, but cherish your encounter, for you will not be seeing it again.");
 
-	stk = mmap((void *)0x100000000, 0x1000, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0x0);
-	exe = mmap((void *)0x200000000, 0x1000, PROT_WRITE|PROT_EXEC, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0x0);
+	stk = mmap((void *)0x6900000000, 0x1000, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0x0);
+	exe = mmap((void *)0x133700000000, 0x1000, PROT_WRITE|PROT_EXEC, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0x0);
 
 	int x = read(0x0, stk, 0x1000) & 0xff;
 

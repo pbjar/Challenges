@@ -10,8 +10,8 @@ p = process(e.path)
 
 #vars
 
-off1 = 0x100000000
-off2 = 0x200000000
+off1 = 0x6900000000
+off2 = 0x133700000000
 sys = 0x4b
 buf1 = 0x300
 buf2 = 0x400
