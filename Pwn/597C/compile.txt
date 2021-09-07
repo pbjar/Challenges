@@ -1,0 +1,1 @@
+gcc -o 597C -no-pie 597C.c
