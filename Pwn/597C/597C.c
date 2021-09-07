@@ -40,7 +40,7 @@ void answer(){
 	scanf("%d%d", &n, &m);
 	m++;
 
-	assert(n >= 1 && n <= mxn && m >= 1 && m < mxm);
+	assert(n >= 1 && n < mxn && m >= 1 && m < mxm);
 
 	for(int i = 0; i < n; i++){
 	       	scanf("%d", &a[i]);
