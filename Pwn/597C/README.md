@@ -4,4 +4,4 @@ You can find the problem at https://codeforces.com/contest/597/problem/C and his
 
 Warning: You may need to increase your local stack size limit to run.
 
-Provided: 597C, libc-2.31.so, ld-2.31.so
+Provided: 597C
