@@ -26,5 +26,7 @@ int main(){
 
 	puts("\nLol how could inputting strings stop the central finite curve.");
 
+	_exit(0);
+
 	return 0;	
 }

