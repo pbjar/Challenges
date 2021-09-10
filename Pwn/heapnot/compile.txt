@@ -1,0 +1,1 @@
+gcc -o heapnot -no-pie -Wl,-z,relro,-z,now heapnot.c

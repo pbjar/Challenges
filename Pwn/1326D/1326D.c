@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <assert.h>
 
 #define mxn 1000100
 #define max(x, y) ((x) > (y) ? (x) : (y))
