@@ -4,6 +4,8 @@
 
 #define n 32
 
+char secret_messag[] = "Good luck on this problem! I think it is pretty geniosity, hopefully you do too.";
+char secret_messag2[] = "I wonder why i'm putting these random strings here anyway. Perhaps it's for a reason?";
 int siz[n];
 char *not[n];
 
