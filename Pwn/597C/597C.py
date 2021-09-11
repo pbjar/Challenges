@@ -7,7 +7,7 @@ e = ELF('./597C')
 
 context.binary = e
 
-p = process("./597C")
+p = process(e.path)
 
 #funcs
 

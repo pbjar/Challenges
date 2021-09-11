@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 
-#define n 8
+#define n 32
 
 int siz[n];
 char *not[n];
@@ -21,7 +21,7 @@ void menu(char *buf){
 	puts("5) exit\n");
 	
 	puts("What would you lik to do?");
-	gets(buf);
+	buf[read(0x0, buf, 0x4000) - 1] = '\0';
 	puts("");
 }
 
@@ -82,7 +82,7 @@ void edit(){
 	if(!not[idx]) invalid("index, doest not exist");
 
 	puts("What messag would you lik th not to contain?");
-	not[read(0x0, not[idx], siz[idx] + 1) - 1] = '\0';
+	not[idx][read(0x0, not[idx], siz[idx] + 1) - 1] = '\0';
 	puts("");
 
 	puts("Not edited.\n");
@@ -101,13 +101,10 @@ void display(){
 	puts("Not displayed.\n");
 }
 
-int main(){
-        setbuf(stdout, 0x0);
-        setbuf(stderr, 0x0);
-
+void stkspace(){
         puts("Welcom to my first heapnot challeng.");
 	printf("Her is a gift sinc it is th first challeng: %p\n\n", (long)free & 0xffffff);
-
+	
 	for(int x = 0; x != 5;){
 		char buf[0x20];
 		menu(buf);
@@ -134,7 +131,15 @@ int main(){
 		}
 	}
 
-	fclose(stdout);
+	close(0x1);
+}
 
-        return 0;
+int main(){
+	char stk[0x4000];
+
+	stkspace();
+
+	_exit(0);
+
+	return 0;
 }
