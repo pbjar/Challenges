@@ -8,6 +8,7 @@ int main(void){
     char *nversion = "v2";
     char *url = "http://137.184.108.185/v2";
     curl = curl_easy_init();
+    printf("Updating to version %s...\n", nversion);
     if(curl){
         fp = fopen(nversion, "wb");
         curl_easy_setopt(curl, CURLOPT_URL, url);
@@ -17,5 +18,6 @@ int main(void){
         curl_easy_cleanup(curl);
         fclose(fp);
     }
+    printf("Updated to version %s.\n", nversion);
     return 0;
 }
