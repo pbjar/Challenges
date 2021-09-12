@@ -294,6 +294,7 @@ void fmtstr(){
 
 void outro(){
 	puts("OUTRO:\n");
+
 	puts("Whoops, looks like you didn't rop anywhere.");
 	puts("Make sure to overflow all the way to the return address to control what function is called.");
 }

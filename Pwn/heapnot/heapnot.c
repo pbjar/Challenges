@@ -104,8 +104,8 @@ void display(){
 }
 
 void stkspace(){
-        puts("Welcom to my second heapnot challeng.");
-	puts("I won't be quite so nice this time. I got a bit carried away...\n");
+        puts("Welcom to my heapnot challeng.");
+	puts("I got a bit carried away...\n");
 
 	for(int x = 0; x != 5;){
 		char buf[0x20];
