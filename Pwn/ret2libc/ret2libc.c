@@ -91,7 +91,8 @@ void resources(){
 	puts("Similar problem writeup (the code will probably help a lot): https://github.com/datajerk/ctf-write-ups/blob/master/redpwnctf2020/the-library/README.md");
 	puts("Elf module pwntools: https://docs.pwntools.com/en/2.2.0/elf.html");
 	puts("ROPgadget download: https://github.com/JonathanSalwan/ROPgadget"); 
-	puts("Also in general, make sure you use 'peda' extenion for gdb: https://github.com/longld/peda\n");
+	puts("Also in general, make sure you use 'peda' extenion for gdb: https://github.com/longld/peda");
+	puts("And this may make life much easier: https://docs.pwntools.com/en/stable/rop/rop.html\n");
 
 	puts("And if that's not enough, remember this is a classic problem, so there should be tons of similar writeups you can google!\n");
 }

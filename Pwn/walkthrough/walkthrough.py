@@ -4,6 +4,8 @@ from pwn import *
 
 e = ELF('./walkthrough')
 
+context.binary = e
+
 p = process(e.path)
 
 #vars
