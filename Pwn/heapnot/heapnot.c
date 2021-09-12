@@ -9,7 +9,7 @@ char secret_messag2[] = "I wonder why i'm putting these random strings here anyw
 int siz[n];
 char *not[n];
 
-char* mallocx(long sz){
+void freex(char *ptr){
 	puts("This cod section is incomplet. W will work on finishing it soon.");
 	_exit(1);
 }
@@ -56,7 +56,7 @@ void creat(){
 
 	if(siz[idx] <= 0 || siz[idx] > 0x1000) invalid("siz, out of bounds");
 
-	not[idx] = mallocx(siz[idx] + 1);
+	not[idx] = malloc(siz[idx] + 1);
 
 	puts("Not created.\n");
 }
@@ -69,7 +69,7 @@ void delet(){
 
 	if(!not[idx]) invalid("index, does not exist");
 
-	free(not[idx]);
+	freex(not[idx]);
 	not[idx] = 0;
 
 	puts("Not deleted.\n");
@@ -82,7 +82,7 @@ void edit(){
 	int idx = inidx();
 
 	if(!not[idx]) invalid("index, doest not exist");
-
+	
 	puts("What messag would you lik th not to contain?");
 	not[idx][read(0x0, not[idx], siz[idx] + 1) - 1] = '\0';
 	puts("");
@@ -104,9 +104,9 @@ void display(){
 }
 
 void stkspace(){
-        puts("Welcom to my first heapnot challeng.");
-	printf("Her is a gift sinc it is th first challeng: %p\n\n", (long)free & 0xffffff);
-	
+        puts("Welcom to my second heapnot challeng.");
+	puts("I won't be quite so nice this time. I got a bit carried away...\n");
+
 	for(int x = 0; x != 5;){
 		char buf[0x20];
 		menu(buf);
@@ -133,7 +133,9 @@ void stkspace(){
 		}
 	}
 
+	close(0x0);
 	close(0x1);
+	close(0x2);
 }
 
 int main(){

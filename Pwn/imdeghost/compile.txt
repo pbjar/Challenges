@@ -1,1 +1,0 @@
-gcc -o imdeghost imdeghost.c -lseccomp

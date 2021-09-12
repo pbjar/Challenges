@@ -1,1 +1,0 @@
-gcc -o houseofrop -no-pie -Wl,-z,relro,-z,now houseofrop.c
