@@ -22,6 +22,7 @@ int cost[15][15] = {
 int vis = (1<<15)-1;
 
 int main(){
+    setlinebuf(stdout);
     printf("hi can you plan me a tour around the world that doesn't make me broke thanks\n");
     printf("if the tour makes me happy then i'll give you the flag :)\n");
     int money = 2200;
