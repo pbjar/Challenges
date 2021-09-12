@@ -11,7 +11,7 @@ w = [randint(1, 69)]
 for i in range(1, n):
     w.append(randint(sum(w[:i]) + 1, w[-1] * r))
 
-q = nextprime(r * w[-21]) #:thinkies:
+q = nextprime(r * w[-21])
 
 b = [r * i % q for i in w]
 c = sum((0 if i == '0' else 1) * j for i, j in zip(flagbits, b))
