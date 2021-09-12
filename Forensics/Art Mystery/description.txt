@@ -1,3 +1,5 @@
 You put you new artwork into a safe but when you looked in the morning, someone had stolen it!! Next time you'll have to cheCk youR loCk.
 
 P.S I might want to remake this challenge with a new image and flag
+
+Given: art.png

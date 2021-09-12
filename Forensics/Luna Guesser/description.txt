@@ -2,3 +2,5 @@ We intercepted this message being sent from a strange location. Can you figure o
 
 Note: The flag is the name of a location. All lowercase letters and words separated by spaces.
 ex: flag{new_york_city}
+
+Given: LunaGuesser.wav
