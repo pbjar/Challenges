@@ -70,7 +70,5 @@ int main(){
 
 	for(int i = 0; i < t; i++) answer();
 
-	fclose(stdout);
-
 	return 0;	
 }
