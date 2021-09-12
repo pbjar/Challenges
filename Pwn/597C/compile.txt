@@ -1,1 +1,1 @@
-gcc -o 597C -no-pie 597C.c
+gcc -o 597C -no-pie -Wl,-z,relro,-z,now 597C.c

