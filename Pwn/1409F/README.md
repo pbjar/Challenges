@@ -1,3 +1,6 @@
+1409F
+Rythm
+
 Besides creating and solving pwn problems, I spend a lot of my time doing competitive programming.
 
 Competitive programming is where you do contests in which you solve algorithm problems in a timed setting. Most competitive programmers use C++, however, one of the greatest competitive progammers goes by the handle rainboy, and he uses C for every contest and solves problems from hardest to easiest.
