@@ -1,4 +1,4 @@
-597C
+597C  
 Rythm
 
 Rainchad is back at it again! Completely ignorning Nick Wu's advice on the greater likelihood of error when using fenwick trees, he decided to use the datastructure on a basic problem featured in a testing round. His code passed in codeforces, but I think he has an error somewhere. Time to pwn?
