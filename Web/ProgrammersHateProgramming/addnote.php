@@ -20,10 +20,11 @@ function generateRandomString($length = 15) {
 if(isset($_POST["notewrite"]))
 {
     $newnote = $_POST["notewrite"];
-    $notetoadd = str_replace_first("<?php", "STAHP THAT", $newnote);
-    $notetoadd = str_replace_first("?>", "REDACTED", $notetoadd);
-    $notetoadd = str_replace_first("<script>", "EVICTED", $notetoadd);
-    $notetoadd = str_replace_first("</script>", "EVICTED", $notetoadd);
+    $notetoadd = str_replace_first("<?php", "", $newnote);
+    $notetoadd = str_replace_first("?>", "", $notetoadd);
+    $notetoadd = str_replace_first("<script>", "", $notetoadd);
+    $notetoadd = str_replace_first("</script>", "", $notetoadd);
+    $notetoadd = str_replace_first("flag", "", $notetoadd);
 
     $filename = generateRandomString();
     array_push($_SESSION["notes"], "$filename.php");

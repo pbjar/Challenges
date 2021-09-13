@@ -2,7 +2,7 @@
 session_start();
 if(!isset($_SESSION["notes"]) && !isset($note_array))
 {
-    $note_array = array("i11PHnNzAn.php", "acPXlP128d.php");
+    $note_array = array("note1.php", "note2.php");
     $_SESSION["notes"]=$note_array;
 }
 ?>
@@ -34,7 +34,8 @@ if(!isset($_SESSION["notes"]) && !isset($note_array))
     <?php
         foreach($_SESSION["notes"] as $key=>$value)
         {
-            echo "<a href=$value> Note $key </a>" . "<br>";
+            $notenum = $key + 1;
+            echo "<a href=$value> Note $notenum </a>" . "<br>";
         }
     ?>
 </div>
