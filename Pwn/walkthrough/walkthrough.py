@@ -6,7 +6,8 @@ e = ELF('./walkthrough')
 
 context.binary = e
 
-p = process(e.path)
+#p = process(e.path)
+p = remote('147.182.172.217', 42001)
 
 #vars
 
