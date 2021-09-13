@@ -1,4 +1,4 @@
-1326D
+1326D  
 Rythm
 
 The codeforces grind continues for rainchad. He decided to try a random problem from a global contest, and he was able to pass the system tests. He removed the leaking debug method, but I think his code is still vulnerable. Can you pwn it?
