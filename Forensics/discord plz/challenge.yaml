@@ -1,0 +1,7 @@
+name: discord plz
+author: ZeroDayTea
+description: |-
+  Join the [discord](https://discord.gg/HcS4efUSyJ)! Always read the rules before a ctf and lookout for announcements and known issues.
+flag: flag{thamks_for_joining_the_disc}
+value: 1
+tiebreakEligible: false
