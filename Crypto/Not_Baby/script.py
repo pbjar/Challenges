@@ -1,17 +1,25 @@
 from Crypto.Util.number import *
-# NOT DONE, FIX, EASILY WOLFRAMABLE
 
 with open('flag.txt','rb') as f:
     flag = f.read().strip()
 
+with open('primes.txt','rb') as f:
+	s=f.read().strip().split()
+	p=int(s[0])
+	q=int(s[1])
+
+
+c=3*p*q
+b=7*q
+a=15*p
+
 e=65537
-p=getPrime(512)
-q=getPrime(512)
-n=p**3 + 2*p**2 q + 2*q**2 + p**2 - p*q**2 + 3*p*q - 2*q**3
+n=34*c**3-(a**3+b**3)
+
 m=bytes_to_long(flag)
 ct=pow(m,e,n)
 
 
-print (n)
-print (e)
-print (ct)
+print ("n: ",n)
+print ("e: ",e)
+print ("ct: ",ct)
