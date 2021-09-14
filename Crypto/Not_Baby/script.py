@@ -1,7 +1,7 @@
 from Crypto.Util.number import *
 
-with open('flag.txt','rb') as f:
-    flag = f.read().strip()
+with open('flag.txt','rb') as g:
+    flag = g.read().strip()
 
 with open('primes.txt','rb') as f:
 	s=f.read().strip().split()
