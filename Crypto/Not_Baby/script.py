@@ -14,7 +14,7 @@ b=7*q
 a=15*p
 
 e=65537
-n=34*c**3-(a**3+b**3)
+n=a**3+b**3-34*c**3
 
 m=bytes_to_long(flag)
 ct=pow(m,e,n)
