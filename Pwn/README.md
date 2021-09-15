@@ -13,7 +13,7 @@ CHALLENGE ORDER
 4. fmtstr  
 5. 1326D  
 6. curve  
-7. 597C  
-8. imdeghost  
-9. wallstreet32  
+7. 597C   
+8. wallstreet32  
+9. imdeghost  
 10. heapnot  
