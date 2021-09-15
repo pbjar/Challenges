@@ -2,7 +2,7 @@ from Crypto.Util.number import getPrime
 from sympy import nextprime
 from random import randint
 
-flag = open('./flag.txt', 'rb').read()
+flag = open('./flag.txt', 'rb').read().strip()
 flagbits = bin(int.from_bytes(flag, 'big'))[2:]
 
 n, r = len(flagbits), getPrime(8)
