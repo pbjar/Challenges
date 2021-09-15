@@ -1,0 +1,9 @@
+    $arghes = $_GET['arghes'];
+    foreach($arghes as $value)
+    {
+        if(!preg_match('/^\w+$/', $value))
+        {
+            exit();
+        }
+    }
+    exec("echo " . implode(" ", $arghes));
