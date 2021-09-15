@@ -3,7 +3,7 @@ from Crypto.Util.number import *
 with open('flag.txt','rb') as g:
     flag = g.read().strip()
 
-with open('nums.txt','rb') as f:
+with open('nums.txt','r') as f:
 	s=f.read().strip().split()
 	a=int(s[0])
 	b=int(s[1])
