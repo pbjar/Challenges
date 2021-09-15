@@ -8,11 +8,11 @@ All problems use the same dockerfile and nsjail setup.
 
 CHALLENGE ORDER  
 EASY:  
-1. walkthrough    
+1. walkthrough  
 2. 1409f  
-3. ret2libc    
+3. ret2libc  
 4. fmtstr  
-MEDIUM:   
+MEDIUM:  
 5. 1326D  
 6. curve  
 7. 597C  
