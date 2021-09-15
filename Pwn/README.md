@@ -6,7 +6,17 @@ All problem have the flag in the file "flag.txt" in the running directory unless
 
 All problems use the same dockerfile and nsjail setup.
 
-CHALLENGE DIFFICULTIES  
-EASY: walkthrough, ret2libc, fmtstr, 1409F  
-MEDIUM: curve, 1326D, 597C  
-HARD: imdeghost, wallstreet32, heapnot  
+CHALLENGE ORDER  
+EASY:  
+1. walkthrough    
+2. 1409f  
+3. ret2libc    
+4. fmtstr  
+MEDIUM:   
+5. 1326D  
+6. curve  
+7. 597C  
+HARD: 
+8. imdeghost  
+9. wallstreet32  
+10. heapnot  
