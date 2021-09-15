@@ -102,7 +102,7 @@ void learn(){
 
 	puts("WANT TO LEARN: \n");
 
-	puts("Before we start, would you like to learn about ret2libc?[Y/N]");
+	puts("Before we start, would you like to learn about ret2libc?[y/N]");
 
 	gets(buf);
 
@@ -136,7 +136,8 @@ void farewell(){
 }
 
 int main(){
-	setvbuf(stdout, NULL, _IONBF, 0);
+	setbuf(stdout, 0);
+	setbuf(stderr, 0);
 
 	asciiart();
 
