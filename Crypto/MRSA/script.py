@@ -16,7 +16,7 @@ print (e)
 print (ct)
 
 def enc(msg):
-    print (p%m)
+    print (p%msg)
 
 try:
     br="#"
