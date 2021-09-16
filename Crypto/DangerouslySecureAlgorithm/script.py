@@ -11,7 +11,7 @@ def H(msg):
   return sha256(msg).hexdigest()
 
 
-msg=b"woahwoahnicej0bwowm4ybeth1s1sn0ts0dangerous"
+msg=b"[REDACTED]"
 
 l=1024
 n=160
