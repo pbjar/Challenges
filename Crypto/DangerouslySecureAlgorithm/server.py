@@ -13,9 +13,9 @@ def H(msg):
 
 msg=b"woahwoahnicej0bwowm4ybeth1s1sn0ts0dangerous"
 
-l=1024
-n=160
-dsa=DSA.generate(1024)
+l=3072
+n=256
+dsa=DSA.generate(3072)
 p = dsa.p
 q = dsa.q
 h=randbelow(p-1)
@@ -36,9 +36,24 @@ if x==0:
 y=pow(g,x,p)
 print (y)
 
-xor=0
 hash=int(H(msg),16)
-for i in range(2):
+num_tries=7
+
+while num_tries>0:
+  print ("You have "+str(num_tries)+" left.")
+  print ("\nDo you want to: ")
+  print ("A: Encrypt again (you need to have a positive number of tries left)")
+  print ("B: Guess the message")
+  op=input().strip()
+  if op=="B":
+    break
+  elif op!="A":
+    print ("Bruh :/")
+    exit()
+  xor=input("Enter what you want to xor, in hex, but note that it must be greater than 2**32: ").strip()
+  xor=int(xor,16)
+  assert(xor>2**32)
+
   k=randbelow(q)^xor
   if k==0:
     tryagain()
@@ -50,7 +65,7 @@ for i in range(2):
   
   print (r)
   print (s)
-  xor=k
+  num_tries-=1
   
 print ("OK, now if you guess my message, I will give you the flag!")
 s=input("Enter: ").strip()
