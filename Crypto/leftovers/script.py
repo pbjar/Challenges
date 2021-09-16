@@ -9,7 +9,7 @@ def gen():
 mod=gen()
 small=mod
 while True:
-  for i in range(2,(mod+5)**(1/2)):
+  for i in range(2,int((mod+5)**(1/2))):
     if mod%i==0:
       small=i
       break
@@ -21,12 +21,11 @@ while True:
 lst=[]
 for i in range(small-1):
   lst.append(1)
-
-r=randint(10,small)
+r=randint(min(10,small-1),small*3)
 for i in range(r):
   lst.append(0)
   
-lst=shuffle(lst)
+shuffle(lst)
 print ("Alright, I will send you a string, where each char contains either 0 or 1.")
 print ("Then you will send me a list of integers back with the same size, separated by spaces.")
 print ("Now for each number in your list, a, if it satisfies a to the power of "+str(small)+" is congruent to 1 mod "+str(mod)+" it will encode to 1.")
@@ -45,8 +44,8 @@ for i in s:
   if i>=mod or i<=1:
     check=False
     break
-check=check & len(s)==len(lst)
-check=check & len(lst)==len(set(lst))
+check=check & (len(s)==len(lst))
+check=check & (len(s)==len(set(s)))
 
 cs=""
 for i in s:
@@ -54,7 +53,7 @@ for i in s:
     cs+="1"
   else:
     cs+="0"
-check=check & cs==string
+check=check & (cs==string)
 
 if check:
   with open('flag.txt','rb') as f:
