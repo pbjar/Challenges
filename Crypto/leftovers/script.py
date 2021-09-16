@@ -1,5 +1,5 @@
 from random import *
-# DOESN'T WORK
+
 def gen():
   mod=randint(10**9,10**10)
   while (mod%2==0):
