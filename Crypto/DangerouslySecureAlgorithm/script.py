@@ -1,9 +1,7 @@
 from hashlib import *
 from Crypto.Util.number import *
 from Crypto.PublicKey import DSA
-from random import *
-
-seed([REDACTED])
+from secrets import *
 
 def tryagain():
   print ("I'm so sorry, please try again :(")
@@ -13,14 +11,16 @@ def H(msg):
   return sha256(msg).hexdigest()
 
 
-msg=b"[REDACTED]"
+msg=b"woahwoahnicej0bwowm4ybeth1s1sn0ts0dangerous"
 
 l=1024
 n=160
 dsa=DSA.generate(1024)
 p = dsa.p
 q = dsa.q
-h=randint(2,p-2)
+h=randbelow(p-1)
+if h<2:
+  tryagain()
 g=pow(h,(p-1)//q,p)
 if g==1:
   tryagain()
@@ -29,14 +29,17 @@ print (p)
 print (q)
 print (g)
 
-x=randint(1,q-1) 
+x=randbelow(q)
+if x==0:
+  tryagain()
+ 
 y=pow(g,x,p)
 print (y)
 
 xor=0
 hash=int(H(msg),16)
 for i in range(2):
-  k=randint(1,q-1)^xor
+  k=randbelow(q)^xor
   if k==0:
     tryagain()
   r=pow(g,k,p)
