@@ -40,7 +40,7 @@ hash=int(H(msg),16)
 num_tries=7
 
 while num_tries>0:
-  print ("You have "+str(num_tries)+" left.")
+  print ("You can encrypt "+str(num_tries)+" more times.")
   print ("\nDo you want to: ")
   print ("A: Encrypt again (you need to have a positive number of tries left)")
   print ("B: Guess the message")
