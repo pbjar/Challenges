@@ -1,6 +1,6 @@
 {
-  "name": "pbjar-owner-problem",
-  "version": "1",
+  "name": "connect-metamask-react-dapp",
+  "version": "0.1.0",
   "author": "Mark Amirkan",
   "private": true,
   "dependencies": {
@@ -18,8 +18,6 @@
     "@types/react": "^17.0.0",
     "@types/react-dom": "^17.0.0",
     "@usedapp/core": "^0.4.1",
-    "dotenv": "^10.0.0",
-    "env-cmd": "^10.1.0",
     "ethers": "^5.4.0",
     "framer-motion": "^4.1.17",
     "react": "^17.0.2",
@@ -32,7 +30,7 @@
     "@ethersproject/contracts": "5.2.0"
   },
   "scripts": {
-    "start": "env-cmd -f process.env react-scripts start",
+    "start": "PORT=80 env-cmd -f process.env react-scripts start",
     "build:staging": "env-cmd -f process.env react-scripts build",
     "build:production": "env-cmd -f process.env react-scripts build",
     "test": "react-scripts test",
