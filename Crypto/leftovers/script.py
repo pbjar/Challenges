@@ -27,6 +27,20 @@ for i in range(r):
   lst.append(0)
   
 lst=shuffle(lst)
-print ("All right, so the goal is that I will send you a list. Then for each corresponding number, you will output a number back to me, a, such that it satisfies that there exists a b such that a is congruent to b to the "+str(mod/small)+" modulo mod"
+print ("All right, so the goal is that I will send you a list.")
+print ("Then you will send me a list of numbers back with the same size, separated by spaces.")
+print ("Now for each number in your list, a, if it satisfies a to the power of "+str(small)+" is congruent to 1 mod "+str(mod)+" I will give you the flag :yayy:")
+print (lst)
 
+s=input("Enter: ").strip().split()
+s=[int (i) for i in s]
+check=len(s)==len(lst)
+for i in range(len(s)):
+  check=check & s[i]==lst[i]
 
+if check:
+  with open('flag.txt','rb') as f:
+      flag = f.read().strip()
+  print (flag)
+else:
+  print ("Better luck next time!")
