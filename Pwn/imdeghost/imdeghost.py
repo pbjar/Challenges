@@ -6,7 +6,8 @@ e = ELF('./imdeghost')
 
 context.binary = e
 
-p = process(e.path)
+#p = process(e.path)
+p = remote('143.198.127.103', 42007)
 
 #funcs
 
