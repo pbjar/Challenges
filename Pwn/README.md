@@ -1,6 +1,8 @@
 Pwn
 
-All problems do not require brute force. Some problems may have a POW to prevent brute force solutions.
+All problems do not require brute force.  
+
+All problems with provided libc and ld files use patchelf to run binaries with them.  
 
 All problems have the flag in the file "flag.txt" in the running directory unless specified otherwise.
 

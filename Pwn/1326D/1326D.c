@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#define mxn 1000100
+#define mxn 500
 #define max(x, y) ((x) > (y) ? (x) : (y))
 #define swap(x, y) ((x) ^= (y), (y) ^= (x), (x) ^= (y))
 

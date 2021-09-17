@@ -4,7 +4,8 @@ from pwn import *
 
 e = ELF('./1409F')
 
-p = process(e.path)
+#p = process(e.path)
+p = remote('143.198.127.103', 42000)
 
 #exploit
 
