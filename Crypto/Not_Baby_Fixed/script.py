@@ -16,6 +16,6 @@ m=bytes_to_long(flag)
 ct=pow(m,e,n)
 
 
-print (n)
-print (e)
-print (ct)
+print ('n:',n)
+print ('e:',e)
+print ('ct:',ct) 
