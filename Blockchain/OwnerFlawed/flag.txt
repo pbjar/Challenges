@@ -1,0 +1,1 @@
+flag{Unpr0t3ct3d_funct1ons}
