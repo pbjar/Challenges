@@ -3,4 +3,4 @@ QuickMaffs
 
 Hmm.... What is this?
 
-Provided: out.txt, script.py
+Provided: out.txt, script.py, nums.txt
