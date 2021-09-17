@@ -16,7 +16,7 @@ CHALLENGE ORDER
 5. 1326D  
 6. curve  
 7. 597C   
-8. wallstreet32  
-9. imdeghost  
+8. wallstreet32
+9. imdeghost    
 10. animefast
 11. heapnot  
