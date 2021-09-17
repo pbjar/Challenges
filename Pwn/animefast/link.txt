@@ -1,0 +1,1 @@
+patchelf --set-interpreter ./ld-2.33.so --add-needed ./libc-2.33.so ./animefast
