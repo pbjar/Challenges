@@ -1,22 +1,20 @@
 <?php
-    highlight_file(__FILE__);
-
     $dir = 'sandbox/' . $_SERVER['REMOTE_ADDR'];
     if ( !file_exists($dir) )
         mkdir($dir);
     chdir($dir);
 
-    $args = $_GET['args'];
-    for ( $i=0; $i<count($args); $i++ ){
-        if ( !preg_match('/^\w+$/', $args[$i]) )
+    $arghes = $_GET['args'];
+    for ( $i=0; $i<count($arghes); $i++ ){
+        if ( !preg_match('/^\w+$/', $arghes[$i]) )
             exit();
     }
-    exec("echo " . implode(" ", $args));
+    exec("echo " . implode(" ", $arghes));
 ?>
 
 <html>
 <head>
-    <title> cOrL </title>
+    <title> omgsosmolhowhacc </title>
 
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
 
