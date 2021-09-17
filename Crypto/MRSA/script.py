@@ -11,13 +11,12 @@ n=p*q
 m=bytes_to_long(flag)
 ct=pow(m,e,n)
 
-print (n)
-print (e)
-print (ct)
+print ('n:',n)
+print ('e:',e)
+print ('ct:',ct)
 
 def enc(msg):
     print (p%msg)
-
 try:
     br="#"
     print (br*70)
@@ -27,10 +26,8 @@ try:
     print (br*70)
     s=int(input("Enter: ").strip())
     assert(s>0 and s<q)        
-
-    print (enc(long_to_bytes(s))
+    enc(s)
 except:
     print ("Bruh why you be like this")
     exit()
     
-
