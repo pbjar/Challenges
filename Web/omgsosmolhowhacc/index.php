@@ -1,6 +1,4 @@
 <?php
-    highlight_file(__FILE__);
-
     $dir = 'sandbox/' . $_SERVER['REMOTE_ADDR'];
     if ( !file_exists($dir) )
         mkdir($dir);
@@ -16,7 +14,7 @@
 
 <html>
 <head>
-    <title> cOrL </title>
+    <title> omgsosmolhowhacc </title>
 
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
 
