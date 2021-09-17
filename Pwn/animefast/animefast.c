@@ -3,7 +3,7 @@
 #include <unistd.h>
 #include <string.h>
 
-#define n 16
+#define n 8
 #define m 56
 #define tsz 100
 #define dsz 176
