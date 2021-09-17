@@ -4,12 +4,12 @@
         mkdir($dir);
     chdir($dir);
 
-    $args = $_GET['args'];
-    for ( $i=0; $i<count($args); $i++ ){
-        if ( !preg_match('/^\w+$/', $args[$i]) )
+    $arghes = $_GET['args'];
+    for ( $i=0; $i<count($arghes); $i++ ){
+        if ( !preg_match('/^\w+$/', $arghes[$i]) )
             exit();
     }
-    exec("echo " . implode(" ", $args));
+    exec("echo " . implode(" ", $arghes));
 ?>
 
 <html>
