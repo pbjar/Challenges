@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
+#include <string.h>
 
 #define n 32
 
@@ -22,8 +23,15 @@ void menu(char *buf){
 	puts("4) display");
 	puts("5) exit\n");
 	
-	puts("What would you lik to do?");
-	buf[read(0x0, buf, 0x4000) - 1] = '\0';
+	puts("What would you lik to do (enter option in format \"[number] go!\")?");
+	for(int i = 0; i < 0x4000; i++){
+		buf[i] = getchar();
+		buf[i + 1] = '\0';
+		if(i >= 4 && !strcmp(" go!\n", buf + i - 4)){
+			buf[i - 4] = '\0';
+			break;
+		}
+	}
 	puts("");
 }
 
@@ -138,7 +146,7 @@ void stkspace(){
 	close(0x2);
 }
 
-int main(){
+int main(){	
 	char stk[0x4000];
 
 	stkspace();
