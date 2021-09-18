@@ -7,8 +7,8 @@ with open('flag.txt','rb') as f:
 flag=b"flag"
 
 
-p=getPrime(64)
-q=getPrime(64)
+p=getPrime(128)
+q=getPrime(128)
 
 c=3*p*q
 b=7*q**2
@@ -26,5 +26,6 @@ print (a+b+c)
 print (a**2+b**2+c**2-(a*b+b*c+c*a))
 
 print ()
-print (p)
-print (q)
+print (a)
+print (b)
+print (c)
