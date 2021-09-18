@@ -6,7 +6,7 @@ All problems with provided libc and ld files use patchelf to run binaries with t
 
 All problems have the flag in the file "flag.txt" in the running directory unless specified otherwise.
 
-All problems use the same dockerfile and nsjail setup.
+All problems use the same dockerfile setup.
 
 CHALLENGE ORDER  
 1. walkthrough  

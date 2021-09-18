@@ -9,4 +9,6 @@ Well, inspired by rainboy, a user named rainchad decided to try to use C too :cl
 
 You can find the problem at https://codeforces.com/contest/1409/problem/F and his submission code at https://codeforces.com/contest/1409/submission/127802505.
 
+Connect with "nc 143.198.127.103 42000".
+
 Provided: 1409F

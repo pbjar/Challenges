@@ -5,6 +5,8 @@ Rainchad is back at it again! Completely ignorning Nick Wu's advice on the great
 
 You can find the problem at https://codeforces.com/contest/597/problem/C and his submission code at https://codeforces.com/contest/597/submission/128087011.
 
+Connect with "nc 143.198.127.103 42005".
+
 Warning: You may need to increase your local stack size limit to run.
 
 Provided: 597C, libc-2.31.so, ld-2.31.so
