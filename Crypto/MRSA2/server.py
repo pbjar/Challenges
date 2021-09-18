@@ -24,10 +24,10 @@ try:
     print (br*70)
     print ("Now here's the More part!!!")
     print ("Enter some number, and I will encrypt it for you")
-    print ("But you gotta follow the condition that your number gotta be less than 2^70 (and like legitamite)")
+    print ("But you gotta follow the condition that your number gotta be less than 2^140 (and like legitamite)")
     print (br*70)
     s=int(input("Enter: ").strip())
-    assert(s>0 and s<2**70)        
+    assert(s>0 and s<2**140)        
     enc(s)
 except:
     print ("Bruh why you be like this")
