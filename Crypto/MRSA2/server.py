@@ -4,7 +4,7 @@ from Crypto.Util.number import *
 with open('flag.txt','rb') as f:
     flag = f.read().strip()
 
-e=65537
+e=257
 p=getPrime(256)
 q=getPrime(256)
 n=p*q
