@@ -17,7 +17,7 @@ CHALLENGE ORDER
 6. curve  
 7. 597C   
 8. RothmBot
-9. wallstreet32
-10. imdeghost    
-11. animefast
-12. heapnot  
+9. imdeghost 
+10. heapnot   
+11. wallstreet32
+12. animefast
